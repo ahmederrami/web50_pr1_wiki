@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+<!-- By ahmederrami@gmail.com -->
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+
+    {% if entry %}
+        {{ entry|safe}}
+    {% else %}
+        <p>Your requested page, {{title}}, was not found !</p>
+    {% endif %}
+{% endblock %}
