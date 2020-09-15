@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import random
 
 from . import util
 
@@ -72,3 +73,33 @@ def add(request):
             })
     else:
         return render(request, "encyclopedia/add.html")
+
+def edit(request, title):
+    # get markdown content of encyclopedia entry which title is title
+    md= util.get_entry(title)
+    return render(request, "encyclopedia/edit.html", {
+        "mdContent": md,
+        "title": title
+    })
+
+def save(request):
+    if 'title' in request.POST and request.POST['title']:
+        title= request.POST['title']
+        content= request.POST['content']
+        util.save_entry(title, content)
+        html= markdown2.markdown(util.get_entry(title))
+        return render(request, "encyclopedia/entry.html", {
+            "entry": html,
+            "title": title
+        })
+    else:
+        return HttpResponse("There is no entry to save")
+
+def randomEntry(request):
+    entries= util.list_entries()
+    randEntry= random.choice(entries)
+    html= markdown2.markdown(util.get_entry(randEntry))
+    return render(request, "encyclopedia/entry.html", {
+        "entry": html,
+        "title": randEntry
+    })

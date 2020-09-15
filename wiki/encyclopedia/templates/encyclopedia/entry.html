@@ -8,6 +8,7 @@
 
     {% if entry %}
         {{ entry|safe}}
+        <a href="{% url 'edit' title %}">Edit this entry</a>
     {% else %}
         <p>Your requested page, {{title}}, was not found !</p>
     {% endif %}

@@ -1,1 +1,3 @@
-Java is powerfull programming language that allow us to create amazing apps
+# Java
+
+Java is a powerfull programming language that allow us to create amazing apps
